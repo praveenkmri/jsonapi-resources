@@ -391,6 +391,9 @@ module JSONAPI
           send "#{attribute}=", value
           @save_needed = true
         rescue ArgumentError
+          puts "!!!!!!!!!!!!!!!!!!!"
+          puts attribute
+          puts value
           # :nocov: Will be thrown if an enum value isn't allowed for an enum. Currently not tested as enums are a rails 4.1 and higher feature
           raise JSONAPI::Exceptions::InvalidFieldValue.new(attribute, value)
           # :nocov:
@@ -794,6 +797,9 @@ module JSONAPI
         when :string
           return if key.nil?
           if key.to_s.include?(',')
+            puts "@@@@@@@@@@@@@@@@@@@@@@@"
+            puts key
+            puts key_type
             raise JSONAPI::Exceptions::InvalidFieldValue.new(:id, key)
           else
             key
@@ -803,12 +809,18 @@ module JSONAPI
           if key.to_s.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/)
             key
           else
+            puts "##################"
+            puts key
+            puts key_type
             raise JSONAPI::Exceptions::InvalidFieldValue.new(:id, key)
           end
         else
           key_type.call(key, context)
         end
       rescue
+        puts "$$$$$$$$$$$$$$$$$$$"
+        puts key
+        puts key_type
         raise JSONAPI::Exceptions::InvalidFieldValue.new(:id, key)
       end
 
