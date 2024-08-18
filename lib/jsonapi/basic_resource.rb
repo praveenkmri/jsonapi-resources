@@ -817,11 +817,11 @@ module JSONAPI
         else
           key_type.call(key, context)
         end
-      rescue
-        puts "$$$$$$$$$$$$$$$$$$$"
-        puts key
-        puts key_type
-        raise JSONAPI::Exceptions::InvalidFieldValue.new(:id, key)
+      # rescue
+      #   puts "$$$$$$$$$$$$$$$$$$$"
+      #   puts key
+      #   puts key_type
+      #   raise JSONAPI::Exceptions::InvalidFieldValue.new(:id, key)
       end
 
       # override to allow for key processing and checking
