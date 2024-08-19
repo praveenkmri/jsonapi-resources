@@ -419,6 +419,7 @@ module JSONAPI
         ]
 
         puts "!!!!!!!!!!!!!!"
+        puts resource_table_alias
         puts pluck_fields
 
         cache_field = resource_klass.attribute_to_model_field(:_cache_field) if options[:cache]
