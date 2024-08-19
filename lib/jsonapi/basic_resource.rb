@@ -797,9 +797,6 @@ module JSONAPI
         when :string
           return if key.nil?
           if key.to_s.include?(',')
-            puts "@@@@@@@@@@@@@@@@@@@@@@@"
-            puts key
-            puts key_type
             raise JSONAPI::Exceptions::InvalidFieldValue.new(:id, key)
           else
             key
@@ -809,19 +806,13 @@ module JSONAPI
           if key.to_s.match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/)
             key
           else
-            puts "##################"
-            puts key
-            puts key_type
             raise JSONAPI::Exceptions::InvalidFieldValue.new(:id, key)
           end
         else
           key_type.call(key, context)
         end
-      # rescue
-      #   puts "$$$$$$$$$$$$$$$$$$$"
-      #   puts key
-      #   puts key_type
-      #   raise JSONAPI::Exceptions::InvalidFieldValue.new(:id, key)
+      rescue
+        raise JSONAPI::Exceptions::InvalidFieldValue.new(:id, key)
       end
 
       # override to allow for key processing and checking
