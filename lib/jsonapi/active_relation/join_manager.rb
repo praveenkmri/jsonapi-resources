@@ -138,6 +138,7 @@ module JSONAPI
       end
 
       def perform_joins(records, options)
+        binding.pry
         join_array = flatten_join_tree_by_depth
 
         join_array.each do |level_joins|
