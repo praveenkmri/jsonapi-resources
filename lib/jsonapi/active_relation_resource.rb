@@ -418,6 +418,9 @@ module JSONAPI
           sql_field_with_alias(resource_table_alias, resource_klass._primary_key)
         ]
 
+        puts "!!!!!!!!!!!!!!"
+        puts pluck_fields
+
         cache_field = resource_klass.attribute_to_model_field(:_cache_field) if options[:cache]
         if cache_field
           pluck_fields << sql_field_with_alias(resource_table_alias, cache_field[:name])
