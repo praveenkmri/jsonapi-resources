@@ -90,6 +90,7 @@ module JSONAPI
       end
 
       def self.alias_from_arel_node(node)
+        binding.pry
         case node.left
         when Arel::Table
           node.left.name
@@ -138,7 +139,6 @@ module JSONAPI
       end
 
       def perform_joins(records, options)
-        binding.pry
         join_array = flatten_join_tree_by_depth
 
         join_array.each do |level_joins|
